@@ -1,0 +1,102 @@
+﻿@page "/armala"
+@using PiazzaBlazor.Shared.Models;
+@using System.Collections;
+
+<h3>Armala</h3>
+<div class="row">
+    <div class="col">
+        @if (tamanos != null)
+        {
+            <select class="form-select" aria-label="Default select example" @onchange="TamanoFunc">
+                <option selected hidden>Selecciona el tamaño</option>
+                @foreach (var item in tamanos)
+                {
+                    <option value="@item.Id">@item.Tamano</option>
+                }
+
+            </select>
+
+
+        }
+
+        @if (tiposMasa != null)
+        {
+            <select class="form-select" aria-label="Default select example" @onchange="TipoFunc">
+                <option selected hidden>Selecciona  el tipo de masa</option>
+                @foreach (var item in tiposMasa)
+                {
+                    <option value="@item.Id">@item.Tipo</option>
+                }
+
+            </select>
+
+
+        }
+
+        @if (tipoSeleccionado.Id > 0)
+        {
+            <select class="form-select" aria-label="Default select example" @onchange="TipoFunc">
+                <option selected hidden>Selecciona  el tipo de masa</option>
+                @foreach (var item in tiposMasa)
+                {
+                    <option value="@item.Id">@item.Tipo</option>
+                }
+
+            </select>
+
+
+        }
+    </div>
+<div class="col-6">
+    @tamanoSeleccionado
+</div>
+
+</div>
+    
+
+
+
+
+@code {
+        List<Tamanos> tamanos = new List< Tamanos > ();
+        Tamanos tamanoSeleccionado = new Tamanos();
+        TipoMasa tipoSelccionado = new TipoMasa();
+        List<TipoMasa> tamanos = new List< TipoMasa > ();
+    protected override async Task OnInitializedAsync()
+    {
+        tamanos = new List> Tamanos > (){
+            new Tamanos{Id= 1, Tamano= "Personal", Precio = 10.0f } ,
+    new Tamanos { Id = 2, Tamano = "Chica", Precio = 20.0f } ,
+    new Tamanos { Id = 3, Tamano = "Mediana", Precio = 30.0f } ,
+    new Tamanos { Id = 4, Tamano = "Grande", Precio = 40.0f }
+        };
+
+        tiposMasa = new List> TipoMasa > ()
+    {
+            new TipoMasa { Id = 1, Tipo = "Personal", Precio = 10.0f } ,
+    new Tamanos { Id = 2, Tipo = "Chica", Precio = 20.0f } ,
+    new Tamanos { Id = 3, Tamano = "Mediana", Precio = 30.0f } ,
+    new Tamanos { Id = 4, Tamano = "Grande", Precio = 40.0f }
+    };
+
+    }
+
+
+
+    private void TamanoFunc(ChangeEventArgs args)
+    {
+        var prueba = args;
+        string id = prueba.Value.ToString();
+    in idint = int.Parse(id);
+
+        tamanoSeleccionado = tamanos.Where(tamano => tamano.Id == idint).FirstOrDefault();
+    }
+
+    private void TipoFunc(ChangeEventArgs args)
+    {
+        var prueba = args;
+        string id = prueba.Value.ToString();
+    in idint = int.Parse(id);
+
+        tipoSeleccionado = tipos.Where(tipos => tipos.Id == idint).FirstOrDefault();
+    }
